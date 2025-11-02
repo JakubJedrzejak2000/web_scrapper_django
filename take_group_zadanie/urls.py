@@ -8,5 +8,5 @@ router = routers.SimpleRouter()
 urlpatterns = [
     path("", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path("selenium/", include("web_scrapping.urls"))
+    path("article/", include("web_scrapping.urls"))
 ]

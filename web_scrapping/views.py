@@ -5,7 +5,7 @@ from web_scrapping.models import Web
 from web_scrapping.serializers import WebSerializer
 
 
-class SeleniumList(APIView):
+class ArticleRename(APIView):
 
     def get(self, request):
         webs = Web.objects.all()
@@ -16,7 +16,7 @@ class SeleniumList(APIView):
         return Response(serialized)
 
 
-class SeleniumDetail(APIView):
+class ArticleDetail(APIView):
     def get(self, request, id):
         try:
             web = Web.objects.get(id=id)

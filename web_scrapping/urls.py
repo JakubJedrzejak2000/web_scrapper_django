@@ -1,8 +1,8 @@
 from django.urls import path
 
-from web_scrapping.views import SeleniumList, SeleniumDetail
+from web_scrapping.views import ArticleRename, ArticleDetail
 
 urlpatterns = [
-    path("", SeleniumList.as_view(), name="selenium"),
-    path("<id>", SeleniumDetail.as_view())
+    path("", ArticleRename.as_view(), name="selenium"),
+    path("<id>", ArticleDetail.as_view())
 ]
