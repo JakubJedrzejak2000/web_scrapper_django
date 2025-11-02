@@ -1,8 +1,6 @@
 from django.urls import include, path
 from rest_framework import routers
 
-from web_scrapping import views as sel_views
-
 router = routers.SimpleRouter()
 
 # Wire up our API using automatic URL routing.

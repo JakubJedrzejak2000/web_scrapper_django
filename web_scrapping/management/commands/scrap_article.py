@@ -1,21 +1,15 @@
 import os
 import re
-from datetime import datetime
-
-# from datetime import timezone
-
-# from datetime import timezone
 
 import dateparser
-from django.core.management.base import BaseCommand, CommandError
-from django.utils import timezone
+from django.core.management.base import BaseCommand
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.ie.service import Service
 
 from web_scrapping.models import Web
+
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
@@ -31,12 +25,9 @@ class Command(BaseCommand):
             command_executor=os.getenv("SELENIUM_REMOTE_URL"),
             options=chrome_options
         )
-        # driver = webdriver.Chrome(
-        #     options=chrome_options
-        # )
         try:
             for number, url in enumerate(urls):
-                print(f"Parsing: {number+1}/{len(urls)}")
+                print(f"Parsing: {number + 1}/{len(urls)}")
                 driver.get(url)
                 driver.implicitly_wait(30)
                 pattern = r'\b\d{1,2}\.\d{1,2}\.\d{4}\b|' \
@@ -52,8 +43,8 @@ class Command(BaseCommand):
                 if Web.objects.filter(url=url).exists():
                     continue
                 else:
-                    print(type(parsed))
-                    Web.objects.create(article_name=title, original_content = html_content, text_content = content.text, url=current_url, date=parsed)
+                    Web.objects.create(article_name=title, original_content=html_content, text_content=content.text,
+                                       url=current_url, date=parsed)
         except TimeoutException:
             print("Timeout exception")
         driver.quit()

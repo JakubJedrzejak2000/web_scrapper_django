@@ -1,4 +1,3 @@
-from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -15,6 +14,7 @@ class SeleniumList(APIView):
             webs = webs.filter(url__icontains=domain)
         serialized = WebSerializer(webs, many=True).data
         return Response(serialized)
+
 
 class SeleniumDetail(APIView):
     def get(self, request, id):
